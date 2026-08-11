@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CappuMind | Histórias que tocam você</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script defer src="js/main.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <button id="menuButton" class="menu-button" aria-label="Menu"><i></i><i></i><i></i></button>
+    <a class="logo" href="index.html">Cappu<small>♥</small></a>
+    <div class="actions">
+      <button id="notificationButton" class="plain-icon">♧<b></b></button>
+      <button id="profileButton" class="avatar">CM</button>
+      <!-- IDs antigos mantidos para o main.js -->
+      <button id="btn-admin" class="d-none" onclick="window.location.href='admin.html'">Admin</button>
+      <button id="btn-login" class="d-none" onclick="abrirLogin()">Entrar</button>
+      <button id="btn-logout" class="d-none" onclick="logout()">Sair</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="kicker">Um cantinho para quem ama histórias</p>
+    <h1>Olá, leitor! 👋</h1>
+    <p>Encontre histórias<br>que tocam você. <strong>♥</strong></p>
+  </div>
+
+  <div class="coffee-art" aria-hidden="true">
+    <div class="cup"><div class="coffee">♥</div></div>
+    <div class="handle"></div>
+    <div class="saucer"></div>
+    <div class="beans">●　●　●</div>
+    <div class="books"><i></i><i></i><i></i></div>
+  </div>
+
+  <div class="search">
+    <span>⌕</span>
+    <input id="busca" type="text" placeholder="Buscar histórias, autores ou gêneros...">
+    <button id="filterButton" type="button">☷</button>
+  </div>
+</section>
+
+<main class="content">
+
+<section>
+  <div class="section-head">
+    <h2>Em destaque</h2>
+    <button class="see-all">Ver tudo ›</button>
+  </div>
+
+  <div class="featured">
+    <article class="featured-card">
+      <div class="cover romance"></div>
+      <div class="featured-info">
+        <span>Romance</span>
+        <h3>Entre páginas<br>e sentimentos</h3>
+        <p>Por Ana Clara</p>
+        <div class="rating">★★★★★ <b>4,8</b></div>
+      </div>
+      <button class="save">♡</button>
+    </article>
+
+    <article class="featured-card">
+      <div class="cover fantasy"></div>
+      <div class="featured-info">
+        <span>Fantasia</span>
+        <h3>O silêncio<br>das palavras</h3>
+        <p>Por Júlia R.</p>
+        <div class="rating">★★★★★ <b>4,7</b></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <h2>Recomendados para você</h2>
+    <button class="see-all">Ver tudo ›</button>
+  </div>
+
+  <!-- O ID produtos é preservado para o main.js -->
+  <div id="produtos" class="stories"></div>
+
+  <div id="emptyStories" class="empty d-none">
+    <div>📚</div>
+    <h3>Nenhuma história encontrada</h3>
+    <p>Tente outro termo de busca.</p>
+  </div>
+</section>
+
+<!-- Filtros antigos preservados para o main.js -->
+<div id="filterPanel" class="filters">
+  <div><label for="precoMin">Valor mínimo</label><input id="precoMin" type="number" placeholder="Mínimo"></div>
+  <div><label for="precoMax">Valor máximo</label><input id="precoMax" type="number" placeholder="Máximo"></div>
+  <button onclick="aplicarFiltros()">Filtrar</button>
+</div>
+
+<section class="writer">
+  <div class="writer-icon">☕</div>
+  <div><div class="writer-title">Escreve histórias?</div><p>Compartilhe suas ideias com o mundo.</p></div>
+  <button id="publishButton">Publicar agora ✎</button>
+</section>
+
+<!-- Mantido para compatibilidade com o main.js -->
+<div class="d-none">
+  <ul id="carrinho"></ul>
+  <button onclick="finalizarCompra()">Finalizar Compra</button>
+</div>
+
+</main>
+
+<aside id="sideMenu" class="side-menu">
+  <div class="side-head"><a class="logo" href="index.html">Cappu</a><button id="closeMenu">×</button></div>
+  <a class="active" href="index.html">⌂ <span>Início</span></a>
+  <a href="explorar.html">⌕ <span>Explorar</span></a>
+  <a href="comunidade.html">♧ <span>Comunidade</span></a>
+  <a href="biblioteca.html">▢ <span>Biblioteca</span></a>
+  <a href="favoritos.html">♡ <span>Favoritos</span></a>
+  <a href="perfil.html">♙ <span>Perfil</span></a>
+  <button id="darkModeButton">☾ <span>Modo escuro</span></button>
+</aside>
+<div id="menuOverlay" class="overlay"></div>
+
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content cappu-modal">
+      <div class="modal-header border-0">
+        <div><small>Bem-vindo ao</small><h5>Cappu</h5></div>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Entrar</h3><p>Continue sua jornada entre histórias.</p>
+        <input class="cappu-input" id="email" placeholder="Seu email" type="email">
+        <input class="cappu-input" id="senha" placeholder="Sua senha" type="password">
+        <button class="cappu-btn full" onclick="login()">Entrar</button>
+        <hr>
+        <h3>Criar conta</h3>
+        <input class="cappu-input" id="emailCadastro" placeholder="Novo email" type="email">
+        <input class="cappu-input" id="senhaCadastro" placeholder="Crie uma senha" type="password">
+        <button class="cappu-btn outline full" onclick="cadastrar()">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a class="active" href="index.html"><span>⌂</span><small>Início</small></a>
+  <a href="explorar.html"><span>⌕</span><small>Explorar</small></a>
+  <a href="biblioteca.html"><span>▢</span><small>Biblioteca</small></a>
+  <a href="favoritos.html"><span>♡</span><small>Favoritos</small></a>
+  <a href="perfil.html"><span>♙</span><small>Perfil</small></a>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<footer class="footer">
+  <p>© 2026 CappuMind — Todos os direitos reservados.</p>
+  <small>Feito com ♥ para quem ama histórias.</small>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (typeof carregarProdutos === "function") carregarProdutos();
+});
+</script>
+<script src="ui.js"></script>
+</body>
+</html>
