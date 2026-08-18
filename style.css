@@ -105,11 +105,17 @@ body.dark-cappu .writer{background:#3a271b}
 /* BUSCA */
 
 .explore-search-section {
-  margin-bottom: 45px;
+  width: 100%;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 1;
 }
 
 .explore-search {
+  width: 100%;
   max-width: 700px;
+  margin: 0 auto;
+  position: relative;
 }
 
 
@@ -338,6 +344,622 @@ body.dark-cappu .writer{background:#3a271b}
 
   .genre-card small {
     font-size: 11px;
+  }
+
+}
+
+/* =====================================================
+   BIBLIOTECA
+===================================================== */
+
+.library-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 55px 25px 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 280px;
+}
+
+.library-hero-content {
+  max-width: 650px;
+}
+
+.library-hero h1 {
+  margin: 0;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(44px, 6vw, 68px);
+
+  line-height: 1;
+
+  color: #4b3027;
+}
+
+.library-hero h1 span {
+  font-size: .7em;
+}
+
+.library-hero-content > p:last-child {
+  margin-top: 20px;
+
+  color: #806b61;
+
+  font-size: 17px;
+
+  max-width: 500px;
+}
+
+
+/* =====================================================
+   DECORAÇÃO
+===================================================== */
+
+.library-decoration {
+  position: relative;
+
+  width: 260px;
+  height: 210px;
+}
+
+.library-book {
+  position: absolute;
+
+  width: 135px;
+  height: 48px;
+
+  border-radius: 7px;
+
+  box-shadow:
+    0 8px 15px rgba(75, 48, 39, .12);
+}
+
+.book-one {
+  background: #b98675;
+
+  bottom: 40px;
+  left: 50px;
+
+  transform: rotate(-4deg);
+}
+
+.book-two {
+  background: #d6b39f;
+
+  bottom: 85px;
+  left: 70px;
+
+  transform: rotate(5deg);
+}
+
+.book-three {
+  background: #80645a;
+
+  bottom: 130px;
+  left: 40px;
+
+  transform: rotate(-7deg);
+}
+
+.coffee-small {
+  position: absolute;
+
+  right: 10px;
+  bottom: 15px;
+
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1e2d9;
+
+  border-radius: 50%;
+
+  font-size: 32px;
+
+  box-shadow:
+    0 8px 20px rgba(75, 48, 39, .1);
+}
+
+
+/* =====================================================
+   ABAS
+===================================================== */
+
+.library-tabs-section {
+  margin-bottom: 45px;
+}
+
+.library-tabs {
+  display: flex;
+
+  gap: 8px;
+
+  border-bottom: 1px solid #eadbd2;
+}
+
+.library-tab {
+  border: none;
+
+  background: transparent;
+
+  padding: 13px 20px;
+
+  color: #927c72;
+
+  font-family: "DM Sans", sans-serif;
+
+  font-weight: 600;
+
+  border-bottom: 3px solid transparent;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+.library-tab span {
+  margin-right: 6px;
+}
+
+.library-tab:hover {
+  color: #69483c;
+}
+
+.library-tab.active {
+  color: #69483c;
+
+  border-bottom-color: #9d705e;
+}
+
+
+/* =====================================================
+   CONTEÚDO DAS ABAS
+===================================================== */
+
+.library-tab-content {
+  display: none;
+}
+
+.library-tab-content.active {
+  display: block;
+}
+
+
+/* =====================================================
+   LISTA DE LEITURA
+===================================================== */
+
+.reading-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+}
+
+.reading-card {
+  display: flex;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background: #fffaf6;
+
+  border: 1px solid #eadbd2;
+
+  border-radius: 22px;
+
+  min-height: 220px;
+
+  transition: .2s ease;
+}
+
+.reading-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(75, 48, 39, .09);
+}
+
+
+/* =====================================================
+   CAPAS
+===================================================== */
+
+.library-cover {
+  width: 145px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255,255,255,.9);
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 42px;
+}
+
+.romance-cover {
+  background:
+    linear-gradient(
+      135deg,
+      #b98275,
+      #e4b9a9
+    );
+}
+
+.fantasy-cover {
+  background:
+    linear-gradient(
+      135deg,
+      #74665f,
+      #b8a69a
+    );
+}
+
+.mystery-cover {
+  background:
+    linear-gradient(
+      135deg,
+      #4f4845,
+      #88766e
+    );
+}
+
+.drama-cover {
+  background:
+    linear-gradient(
+      135deg,
+      #9b8075,
+      #c9aaa0
+    );
+}
+
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.reading-info {
+  padding: 22px;
+
+  flex: 1;
+}
+
+.story-category {
+  color: #a07868;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: .06em;
+}
+
+.reading-info h3 {
+  margin: 7px 0;
+
+  font-family: "Playfair Display", serif;
+
+  color: #4b3027;
+
+  font-size: 22px;
+
+  line-height: 1.15;
+}
+
+.reading-info > p {
+  color: #8d7870;
+
+  font-size: 13px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   PROGRESSO
+===================================================== */
+
+.progress-area {
+  margin-top: 8px;
+}
+
+.progress-info {
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #927c72;
+
+  font-size: 11px;
+
+  margin-bottom: 6px;
+}
+
+.reading-progress {
+  width: 100%;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  background: #eaded7;
+
+  border-radius: 20px;
+}
+
+.reading-progress-bar {
+  height: 100%;
+
+  background: #9d705e;
+
+  border-radius: 20px;
+}
+
+
+/* =====================================================
+   BOTÃO CONTINUAR
+===================================================== */
+
+.continue-button {
+  margin-top: 17px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #765144;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.continue-button:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   HISTÓRIAS SALVAS / CONCLUÍDAS
+===================================================== */
+
+.library-stories {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.library-story-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  position: relative;
+
+  padding: 16px;
+
+  background: #fffaf6;
+
+  border: 1px solid #eadbd2;
+
+  border-radius: 20px;
+
+  transition: .2s ease;
+}
+
+.library-story-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 24px rgba(75,48,39,.08);
+}
+
+.story-mini-cover {
+  width: 85px;
+  height: 105px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: rgba(255,255,255,.9);
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 28px;
+}
+
+.library-story-card > div:nth-child(2) {
+  min-width: 0;
+}
+
+.library-story-card > div:nth-child(2) > span {
+  color: #a07868;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.library-story-card h3 {
+  margin: 5px 0;
+
+  color: #4b3027;
+
+  font-family: "Playfair Display", serif;
+
+  font-size: 19px;
+}
+
+.library-story-card p {
+  margin: 0 0 8px;
+
+  color: #8d7870;
+
+  font-size: 12px;
+}
+
+.remove-save {
+  position: absolute;
+
+  top: 13px;
+  right: 13px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #9d705e;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   CONCLUÍDOS
+===================================================== */
+
+.completed-label {
+  color: #7e655a;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+/* =====================================================
+   ÁREA VAZIA
+===================================================== */
+
+.library-empty {
+  margin-top: 65px;
+
+  padding: 45px 25px;
+
+  text-align: center;
+
+  background: #f8eee8;
+
+  border-radius: 25px;
+}
+
+.empty-icon {
+  font-size: 45px;
+
+  margin-bottom: 10px;
+}
+
+.library-empty h2 {
+  font-family: "Playfair Display", serif;
+
+  color: #4b3027;
+
+  font-size: 27px;
+}
+
+.library-empty p {
+  max-width: 450px;
+
+  margin: 10px auto 22px;
+
+  color: #806b61;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 850px) {
+
+  .library-decoration {
+    display: none;
+  }
+
+  .reading-list,
+  .library-stories {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .library-hero {
+    padding-top: 35px;
+    padding-bottom: 25px;
+  }
+
+  .library-hero h1 {
+    font-size: 45px;
+  }
+
+  .library-tabs {
+    overflow-x: auto;
+  }
+
+  .library-tab {
+    white-space: nowrap;
+
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .reading-card {
+    flex-direction: column;
+  }
+
+  .library-cover {
+    width: 100%;
+    height: 150px;
+  }
+
+  .reading-info {
+    padding: 18px;
+  }
+
+  .library-story-card {
+    gap: 13px;
   }
 
 }

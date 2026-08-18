@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CappuMind | Minha Biblioteca</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script defer src="js/main.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ==================================================
+     TOPO
+================================================== -->
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <button
+      id="menuButton"
+      class="menu-button"
+      aria-label="Abrir menu">
+
+      <i></i>
+      <i></i>
+      <i></i>
+
+    </button>
+
+    <a class="logo" href="index.html">
+      Cappu<small>♥</small>
+    </a>
+
+    <div class="actions">
+
+      <button
+        id="notificationButton"
+        class="plain-icon"
+        aria-label="Notificações">
+
+        ♧<b></b>
+
+      </button>
+
+      <button
+        id="profileButton"
+        class="avatar"
+        aria-label="Perfil">
+
+        CM
+
+      </button>
+
+
+      <!-- IDs mantidos para compatibilidade -->
+
+      <button
+        id="btn-admin"
+        class="d-none"
+        onclick="window.location.href='admin.html'">
+
+        Admin
+
+      </button>
+
+      <button
+        id="btn-login"
+        class="d-none"
+        onclick="abrirLogin()">
+
+        Entrar
+
+      </button>
+
+      <button
+        id="btn-logout"
+        class="d-none"
+        onclick="logout()">
+
+        Sair
+
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- ==================================================
+     CABEÇALHO DA BIBLIOTECA
+================================================== -->
+
+<section class="library-hero">
+
+  <div class="library-hero-content">
+
+    <p class="kicker">
+      Seu cantinho de leitura
+    </p>
+
+    <h1>
+      Minha<br>
+      biblioteca <span>♥</span>
+    </h1>
+
+    <p>
+      Organize suas histórias favoritas
+      e continue de onde parou.
+    </p>
+
+  </div>
+
+
+  <div class="library-decoration" aria-hidden="true">
+
+    <div class="library-book book-one"></div>
+    <div class="library-book book-two"></div>
+    <div class="library-book book-three"></div>
+
+    <div class="coffee-small">
+      ☕
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     CONTEÚDO
+================================================== -->
+
+<main class="content library-content">
+
+
+  <!-- ==================================================
+       ABAS
+  ================================================== -->
+
+  <section class="library-tabs-section">
+
+    <div class="library-tabs">
+
+      <button
+        class="library-tab active"
+        data-tab="lendo">
+
+        <span>📖</span>
+        Lendo
+
+      </button>
+
+
+      <button
+        class="library-tab"
+        data-tab="salvos">
+
+        <span>♡</span>
+        Salvos
+
+      </button>
+
+
+      <button
+        class="library-tab"
+        data-tab="concluidos">
+
+        <span>✓</span>
+        Concluídos
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       CONTINUAR LENDO
+  ================================================== -->
+
+  <section
+    id="tab-lendo"
+    class="library-tab-content active">
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Continue sua jornada
+        </p>
+
+        <h2>
+          Continuar lendo
+        </h2>
+
+      </div>
+
+      <button class="see-all">
+        Ver tudo ›
+      </button>
+
+    </div>
+
+
+    <div class="reading-list">
+
+
+      <!-- História 1 -->
+
+      <article class="reading-card">
+
+        <div class="library-cover romance-cover">
+
+          <span>♥</span>
+
+        </div>
+
+
+        <div class="reading-info">
+
+          <span class="story-category">
+            Romance
+          </span>
+
+          <h3>
+            Entre páginas<br>
+            e sentimentos
+          </h3>
+
+          <p>
+            Por Ana Clara
+          </p>
+
+
+          <div class="progress-area">
+
+            <div class="progress-info">
+
+              <span>
+                68% concluído
+              </span>
+
+              <span>
+                Cap. 12
+              </span>
+
+            </div>
+
+            <div class="reading-progress">
+
+              <div
+                class="reading-progress-bar"
+                style="width:68%">
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <button class="continue-button">
+            Continuar lendo →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- História 2 -->
+
+      <article class="reading-card">
+
+        <div class="library-cover fantasy-cover">
+
+          <span>✦</span>
+
+        </div>
+
+
+        <div class="reading-info">
+
+          <span class="story-category">
+            Fantasia
+          </span>
+
+          <h3>
+            O silêncio<br>
+            das palavras
+          </h3>
+
+          <p>
+            Por Júlia R.
+          </p>
+
+
+          <div class="progress-area">
+
+            <div class="progress-info">
+
+              <span>
+                32% concluído
+              </span>
+
+              <span>
+                Cap. 5
+              </span>
+
+            </div>
+
+            <div class="reading-progress">
+
+              <div
+                class="reading-progress-bar"
+                style="width:32%">
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <button class="continue-button">
+            Continuar lendo →
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       HISTÓRIAS SALVAS
+  ================================================== -->
+
+  <section
+    id="tab-salvos"
+    class="library-tab-content">
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Guardadas para depois
+        </p>
+
+        <h2>
+          Histórias salvas
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="library-stories">
+
+
+      <article class="library-story-card">
+
+        <div class="story-mini-cover mystery-cover">
+          <span>?</span>
+        </div>
+
+        <div>
+
+          <span>
+            Mistério
+          </span>
+
+          <h3>
+            A última carta
+          </h3>
+
+          <p>
+            Por Lucas M.
+          </p>
+
+          <div class="rating">
+            ★★★★★ <b>4,6</b>
+          </div>
+
+        </div>
+
+        <button class="remove-save">
+          ♥
+        </button>
+
+      </article>
+
+
+      <article class="library-story-card">
+
+        <div class="story-mini-cover drama-cover">
+          <span>☾</span>
+        </div>
+
+        <div>
+
+          <span>
+            Drama
+          </span>
+
+          <h3>
+            Depois da chuva
+          </h3>
+
+          <p>
+            Por Marina S.
+          </p>
+
+          <div class="rating">
+            ★★★★★ <b>4,5</b>
+          </div>
+
+        </div>
+
+        <button class="remove-save">
+          ♥
+        </button>
+
+      </article>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       CONCLUÍDOS
+  ================================================== -->
+
+  <section
+    id="tab-concluidos"
+    class="library-tab-content">
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Histórias que você terminou
+        </p>
+
+        <h2>
+          Concluídos
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="library-stories">
+
+
+      <article class="library-story-card completed">
+
+        <div class="story-mini-cover romance-cover">
+          <span>♥</span>
+        </div>
+
+        <div>
+
+          <span>
+            Romance
+          </span>
+
+          <h3>
+            Um café para dois
+          </h3>
+
+          <p>
+            Por Sofia M.
+          </p>
+
+          <div class="completed-label">
+            ✓ História concluída
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="library-story-card completed">
+
+        <div class="story-mini-cover fantasy-cover">
+          <span>✦</span>
+        </div>
+
+        <div>
+
+          <span>
+            Fantasia
+          </span>
+
+          <h3>
+            Além do horizonte
+          </h3>
+
+          <p>
+            Por Rafael C.
+          </p>
+
+          <div class="completed-label">
+            ✓ História concluída
+          </div>
+
+        </div>
+
+      </article>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       ESTADO VAZIO
+  ================================================== -->
+
+  <section class="library-empty">
+
+    <div class="empty-icon">
+      📚
+    </div>
+
+    <h2>
+      Sua biblioteca está começando
+    </h2>
+
+    <p>
+      Explore novas histórias e salve aquelas
+      que despertarem sua curiosidade.
+    </p>
+
+    <a
+      href="explorar.html"
+      class="cappu-btn">
+
+      Explorar histórias
+
+    </a>
+
+  </section>
+
+
+</main>
+
+
+<!-- ==================================================
+     MENU LATERAL
+================================================== -->
+
+<aside id="sideMenu" class="side-menu">
+
+  <div class="side-head">
+
+    <a
+      class="logo"
+      href="index.html">
+
+      Cappu
+
+    </a>
+
+    <button id="closeMenu">
+      ×
+    </button>
+
+  </div>
+
+
+  <a href="index.html">
+    ⌂
+    <span>Início</span>
+  </a>
+
+
+  <a href="explorar.html">
+    ⌕
+    <span>Explorar</span>
+  </a>
+
+
+  <a href="comunidade.html">
+    ♧
+    <span>Comunidade</span>
+  </a>
+
+
+  <a
+    class="active"
+    href="biblioteca.html">
+
+    ▢
+    <span>Biblioteca</span>
+
+  </a>
+
+
+  <a href="favoritos.html">
+    ♡
+    <span>Favoritos</span>
+  </a>
+
+
+  <a href="perfil.html">
+    ♙
+    <span>Perfil</span>
+  </a>
+
+
+  <button id="darkModeButton">
+
+    ☾
+    <span>Modo escuro</span>
+
+  </button>
+
+</aside>
+
+
+<div
+  id="menuOverlay"
+  class="overlay">
+</div>
+
+
+<!-- ==================================================
+     MODAL LOGIN
+================================================== -->
+
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content cappu-modal">
+
+      <div class="modal-header border-0">
+
+        <div>
+
+          <small>
+            Bem-vindo ao
+          </small>
+
+          <h5>
+            Cappu
+          </h5>
+
+        </div>
+
+        <button
+          class="btn-close"
+          data-bs-dismiss="modal">
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <h3>
+          Entrar
+        </h3>
+
+        <p>
+          Continue sua jornada entre histórias.
+        </p>
+
+
+        <input
+          class="cappu-input"
+          id="email"
+          placeholder="Seu email"
+          type="email">
+
+
+        <input
+          class="cappu-input"
+          id="senha"
+          placeholder="Sua senha"
+          type="password">
+
+
+        <button
+          class="cappu-btn full"
+          onclick="login()">
+
+          Entrar
+
+        </button>
+
+
+        <hr>
+
+
+        <h3>
+          Criar conta
+        </h3>
+
+
+        <input
+          class="cappu-input"
+          id="emailCadastro"
+          placeholder="Novo email"
+          type="email">
+
+
+        <input
+          class="cappu-input"
+          id="senhaCadastro"
+          placeholder="Crie uma senha"
+          type="password">
+
+
+        <button
+          class="cappu-btn outline full"
+          onclick="cadastrar()">
+
+          Cadastrar
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ==================================================
+     NAVEGAÇÃO INFERIOR
+================================================== -->
+
+<nav class="bottom-nav">
+
+  <a href="index.html">
+
+    <span>⌂</span>
+
+    <small>
+      Início
+    </small>
+
+  </a>
+
+
+  <a href="explorar.html">
+
+    <span>⌕</span>
+
+    <small>
+      Explorar
+    </small>
+
+  </a>
+
+
+  <a
+    class="active"
+    href="biblioteca.html">
+
+    <span>▢</span>
+
+    <small>
+      Biblioteca
+    </small>
+
+  </a>
+
+
+  <a href="favoritos.html">
+
+    <span>♡</span>
+
+    <small>
+      Favoritos
+    </small>
+
+  </a>
+
+
+  <a href="perfil.html">
+
+    <span>♙</span>
+
+    <small>
+      Perfil
+    </small>
+
+  </a>
+
+</nav>
+
+
+<div
+  id="toast"
+  class="toast">
+</div>
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="footer">
+
+  <p>
+    © 2026 CappuMind — Todos os direitos reservados.
+  </p>
+
+  <small>
+    Feito com ♥ para quem ama histórias.
+  </small>
+
+</footer>
+
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="ui.js"></script>
+
+
+<!-- ==================================================
+     ABAS DA BIBLIOTECA
+================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const tabs =
+    document.querySelectorAll(".library-tab");
+
+  const contents =
+    document.querySelectorAll(".library-tab-content");
+
+
+  tabs.forEach(tab => {
+
+    tab.addEventListener("click", function () {
+
+      const target =
+        this.dataset.tab;
+
+
+      tabs.forEach(item => {
+
+        item.classList.remove("active");
+
+      });
+
+
+      contents.forEach(content => {
+
+        content.classList.remove("active");
+
+      });
+
+
+      this.classList.add("active");
+
+
+      const selected =
+        document.getElementById(
+          "tab-" + target
+        );
+
+
+      if (selected) {
+        selected.classList.add("active");
+      }
+
+    });
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
