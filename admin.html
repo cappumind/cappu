@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+  <title>CappuMind | Área Administrativa</title>
+
+
+  <!-- =========================
+       FONTES
+  ========================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+
+  <!-- Bootstrap -->
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+
+  <!-- =========================
+       FIREBASE
+  ========================== -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+
+  <script src="js/firebase-config.js"></script>
+
+  <!-- Seu JS administrativo -->
+
+  <script defer src="js/admin.js"></script>
+
+
+  <!-- Interface -->
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="admin-page">
+
+
+<!-- ==================================================
+     TOPO
+================================================== -->
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+
+    <button
+      id="menuButton"
+      class="menu-button"
+      aria-label="Abrir menu">
+
+      <i></i>
+      <i></i>
+      <i></i>
+
+    </button>
+
+
+    <a
+      class="logo"
+      href="index.html">
+
+      Cappu<small>♥</small>
+
+    </a>
+
+
+    <div class="actions">
+
+
+      <span class="admin-badge">
+        Administrador
+      </span>
+
+
+      <button
+        id="profileButton"
+        class="avatar"
+        aria-label="Perfil">
+
+        AD
+
+      </button>
+
+
+      <button
+        id="btn-logout"
+        class="admin-logout"
+        onclick="logout()">
+
+        Sair
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     MENU LATERAL
+================================================== -->
+
+<aside
+  id="sideMenu"
+  class="side-menu">
+
+
+  <div class="side-head">
+
+    <a
+      class="logo"
+      href="index.html">
+
+      Cappu
+
+    </a>
+
+
+    <button id="closeMenu">
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="admin-menu-title">
+    PAINEL
+  </div>
+
+
+  <a
+    class="active"
+    href="admin.html">
+
+    📊
+    <span>
+      Visão geral
+    </span>
+
+  </a>
+
+
+  <a href="#historias">
+
+    📚
+    <span>
+      Histórias
+    </span>
+
+  </a>
+
+
+  <a href="#usuarios">
+
+    👥
+    <span>
+      Usuários
+    </span>
+
+  </a>
+
+
+  <a href="#comunidade">
+
+    💬
+    <span>
+      Comunidade
+    </span>
+
+  </a>
+
+
+  <a href="#denuncias">
+
+    ⚠️
+    <span>
+      Denúncias
+    </span>
+
+  </a>
+
+
+  <div class="admin-menu-divider"></div>
+
+
+  <a href="index.html">
+
+    ←
+    <span>
+      Voltar ao site
+    </span>
+
+  </a>
+
+
+  <button id="darkModeButton">
+
+    ☾
+    <span>
+      Modo escuro
+    </span>
+
+  </button>
+
+
+</aside>
+
+
+<div
+  id="menuOverlay"
+  class="overlay">
+</div>
+
+
+
+<!-- ==================================================
+     CONTEÚDO PRINCIPAL
+================================================== -->
+
+<main class="admin-content">
+
+
+  <!-- =========================
+       CABEÇALHO
+  ========================== -->
+
+  <section class="admin-welcome">
+
+
+    <div>
+
+      <p class="kicker">
+        Área administrativa
+      </p>
+
+
+      <h1>
+        Olá, administrador! 👋
+      </h1>
+
+
+      <p>
+        Gerencie o conteúdo e a comunidade
+        do CappuMind.
+      </p>
+
+    </div>
+
+
+    <div class="admin-coffee">
+      ☕
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ==================================================
+       ESTATÍSTICAS
+  ================================================== -->
+
+  <section class="admin-stats">
+
+
+    <article class="admin-stat-card">
+
+      <div class="stat-icon">
+        📚
+      </div>
+
+
+      <div>
+
+        <span>
+          Histórias
+        </span>
+
+        <strong id="totalProdutos">
+          0
+        </strong>
+
+        <small>
+          publicadas
+        </small>
+
+      </div>
+
+    </article>
+
+
+
+    <article class="admin-stat-card">
+
+      <div class="stat-icon">
+        👥
+      </div>
+
+
+      <div>
+
+        <span>
+          Usuários
+        </span>
+
+        <strong id="totalUsuarios">
+          0
+        </strong>
+
+        <small>
+          cadastrados
+        </small>
+
+      </div>
+
+    </article>
+
+
+
+    <article class="admin-stat-card">
+
+      <div class="stat-icon">
+        💬
+      </div>
+
+
+      <div>
+
+        <span>
+          Comunidade
+        </span>
+
+        <strong id="totalPublicacoes">
+          0
+        </strong>
+
+        <small>
+          publicações
+        </small>
+
+      </div>
+
+    </article>
+
+
+
+    <article class="admin-stat-card alert-card">
+
+      <div class="stat-icon">
+        ⚠️
+      </div>
+
+
+      <div>
+
+        <span>
+          Denúncias
+        </span>
+
+        <strong id="totalDenuncias">
+          0
+        </strong>
+
+        <small>
+          pendentes
+        </small>
+
+      </div>
+
+    </article>
+
+
+  </section>
+
+
+
+  <!-- ==================================================
+       AÇÕES RÁPIDAS
+  ================================================== -->
+
+  <section class="admin-section">
+
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Atalhos
+        </p>
+
+        <h2>
+          Ações rápidas
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="admin-actions">
+
+
+      <button
+        class="admin-action"
+        onclick="abrirModalProduto()">
+
+        <span>
+          ✚
+        </span>
+
+        <div>
+
+          <strong>
+            Nova história
+          </strong>
+
+          <small>
+            Adicionar uma publicação
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <button
+        class="admin-action"
+        onclick="document.getElementById('usuarios').scrollIntoView({behavior:'smooth'})">
+
+        <span>
+          👥
+        </span>
+
+        <div>
+
+          <strong>
+            Usuários
+          </strong>
+
+          <small>
+            Gerenciar contas
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <button
+        class="admin-action"
+        onclick="document.getElementById('historias').scrollIntoView({behavior:'smooth'})">
+
+        <span>
+          📖
+        </span>
+
+        <div>
+
+          <strong>
+            Histórias
+          </strong>
+
+          <small>
+            Editar publicações
+          </small>
+
+        </div>
+
+      </button>
+
+
+
+      <button
+        class="admin-action"
+        onclick="document.getElementById('denuncias').scrollIntoView({behavior:'smooth'})">
+
+        <span>
+          ⚠️
+        </span>
+
+        <div>
+
+          <strong>
+            Denúncias
+          </strong>
+
+          <small>
+            Verificar conteúdo
+          </small>
+
+        </div>
+
+      </button>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==================================================
+       HISTÓRIAS
+  ================================================== -->
+
+  <section
+    id="historias"
+    class="admin-section">
+
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Gerenciamento
+        </p>
+
+        <h2>
+          Histórias publicadas
+        </h2>
+
+      </div>
+
+
+      <button
+        class="cappu-btn"
+        onclick="abrirModalProduto()">
+
+        + Nova história
+
+      </button>
+
+    </div>
+
+
+    <div class="admin-table-wrapper">
+
+
+      <table class="admin-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              História
+            </th>
+
+            <th>
+              Autor
+            </th>
+
+            <th>
+              Categoria
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <!--
+          IMPORTANTE:
+
+          O ID produtosAdmin pode ser usado
+          pelo seu admin.js para inserir
+          as histórias.
+        -->
+
+        <tbody id="produtosAdmin">
+
+          <tr>
+
+            <td colspan="5">
+
+              <div class="admin-loading">
+
+                Carregando histórias...
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==================================================
+       USUÁRIOS
+  ================================================== -->
+
+  <section
+    id="usuarios"
+    class="admin-section">
+
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Comunidade CappuMind
+        </p>
+
+        <h2>
+          Usuários
+        </h2>
+
+      </div>
+
+
+      <div class="admin-search">
+
+        <span>
+          ⌕
+        </span>
+
+        <input
+          id="buscaUsuario"
+          type="text"
+          placeholder="Buscar usuário...">
+
+      </div>
+
+    </div>
+
+
+    <div class="admin-table-wrapper">
+
+
+      <table class="admin-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Usuário
+            </th>
+
+            <th>
+              Email
+            </th>
+
+            <th>
+              Perfil
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Ações
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <!--
+          Mantém compatibilidade
+          com carregarUsuarios()
+        -->
+
+        <tbody id="usuariosAdmin">
+
+          <tr>
+
+            <td colspan="5">
+
+              <div class="admin-loading">
+
+                Carregando usuários...
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ==================================================
+       COMUNIDADE
+  ================================================== -->
+
+  <section
+    id="comunidade"
+    class="admin-section">
+
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Moderação
+        </p>
+
+        <h2>
+          Comunidade
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="moderation-card">
+
+
+      <div class="moderation-icon">
+        💬
+      </div>
+
+
+      <div>
+
+        <h3>
+          Espaço da comunidade
+        </h3>
+
+        <p>
+          Acompanhe ideias de histórias,
+          personagens, enredos e discussões
+          compartilhadas pelos leitores.
+        </p>
+
+      </div>
+
+
+      <button class="cappu-btn outline">
+
+        Gerenciar
+
+      </button>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- ==================================================
+       DENÚNCIAS
+  ================================================== -->
+
+  <section
+    id="denuncias"
+    class="admin-section">
+
+
+    <div class="section-head">
+
+      <div>
+
+        <p class="section-kicker">
+          Segurança
+        </p>
+
+        <h2>
+          Denúncias pendentes
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="empty-admin">
+
+
+      <div>
+        ✓
+      </div>
+
+
+      <h3>
+        Tudo tranquilo por aqui!
+      </h3>
+
+
+      <p>
+        Não existem denúncias pendentes
+        no momento.
+      </p>
+
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+
+<!-- ==================================================
+     MODAL DE HISTÓRIA
+================================================== -->
+
+<div
+  class="modal fade"
+  id="produtoModal"
+  tabindex="-1">
+
+
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+
+
+    <div class="modal-content cappu-modal">
+
+
+      <div class="modal-header border-0">
+
+
+        <div>
+
+          <small>
+            CappuMind
+          </small>
+
+          <h5>
+            Nova história
+          </h5>
+
+        </div>
+
+
+        <button
+          class="btn-close"
+          data-bs-dismiss="modal">
+        </button>
+
+      </div>
+
+
+
+      <div class="modal-body">
+
+
+        <div class="admin-form-grid">
+
+
+          <div>
+
+            <label>
+              Título
+            </label>
+
+            <input
+              id="nomeProduto"
+              class="cappu-input"
+              type="text"
+              placeholder="Nome da história">
+
+          </div>
+
+
+
+          <div>
+
+            <label>
+              Autor
+            </label>
+
+            <input
+              id="autorProduto"
+              class="cappu-input"
+              type="text"
+              placeholder="Nome do autor">
+
+          </div>
+
+
+
+          <div>
+
+            <label>
+              Gênero
+            </label>
+
+            <select
+              id="categoriaProduto"
+              class="cappu-input">
+
+              <option value="">
+                Selecione
+              </option>
+
+              <option value="Romance">
+                Romance
+              </option>
+
+              <option value="Fantasia">
+                Fantasia
+              </option>
+
+              <option value="Mistério">
+                Mistério
+              </option>
+
+              <option value="Drama">
+                Drama
+              </option>
+
+              <option value="Aventura">
+                Aventura
+              </option>
+
+              <option value="Terror">
+                Terror
+              </option>
+
+            </select>
+
+          </div>
+
+
+
+          <div>
+
+            <label>
+              Status
+            </label>
+
+            <select
+              id="statusProduto"
+              class="cappu-input">
+
+              <option value="publicado">
+                Publicado
+              </option>
+
+              <option value="rascunho">
+                Rascunho
+              </option>
+
+              <option value="bloqueado">
+                Bloqueado
+              </option>
+
+            </select>
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="mt-3">
+
+          <label>
+            Sinopse
+          </label>
+
+          <textarea
+            id="descricaoProduto"
+            class="cappu-input"
+            rows="5"
+            placeholder="Escreva uma breve sinopse...">
+          </textarea>
+
+        </div>
+
+
+
+        <div class="admin-modal-actions">
+
+          <button
+            class="cappu-btn outline"
+            data-bs-dismiss="modal">
+
+            Cancelar
+
+          </button>
+
+
+          <!--
+            Se o seu admin.js tiver uma função
+            cadastrarProduto(), você pode ligar aqui.
+          -->
+
+          <button
+            class="cappu-btn"
+            onclick="salvarProduto()">
+
+            Salvar história
+
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     NAVEGAÇÃO MOBILE
+================================================== -->
+
+<nav class="bottom-nav">
+
+
+  <a href="index.html">
+
+    <span>
+      ⌂
+    </span>
+
+    <small>
+      Início
+    </small>
+
+  </a>
+
+
+  <a href="explorar.html">
+
+    <span>
+      ⌕
+    </span>
+
+    <small>
+      Explorar
+    </small>
+
+  </a>
+
+
+  <a href="biblioteca.html">
+
+    <span>
+      ▢
+    </span>
+
+    <small>
+      Biblioteca
+    </small>
+
+  </a>
+
+
+  <a href="favoritos.html">
+
+    <span>
+      ♡
+    </span>
+
+    <small>
+      Favoritos
+    </small>
+
+  </a>
+
+
+  <a
+    class="active"
+    href="admin.html">
+
+    <span>
+      ⚙
+    </span>
+
+    <small>
+      Admin
+    </small>
+
+  </a>
+
+
+</nav>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="footer">
+
+  <p>
+    © 2026 CappuMind — Todos os direitos reservados.
+  </p>
+
+  <small>
+    Feito com ♥ para quem ama histórias.
+  </small>
+
+</footer>
+
+
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- UI -->
+
+<script src="ui.js"></script>
+
+
+<script>
+
+/*
+ * Abre o modal de nova história.
+ *
+ * Caso você já tenha uma função com esse nome
+ * no admin.js, ela será utilizada.
+ */
+
+function abrirModalProduto() {
+
+  const modal =
+    document.getElementById("produtoModal");
+
+  if (!modal) return;
+
+  const instance =
+    bootstrap.Modal.getOrCreateInstance(modal);
+
+  instance.show();
+
+}
+
+
+/*
+ * Exemplo de função.
+ *
+ * Se seu admin.js já possuir salvarProduto(),
+ * remova esta função daqui.
+ */
+
+function salvarProduto() {
+
+  if (typeof cadastrarProduto === "function") {
+
+    cadastrarProduto();
+
+    return;
+
+  }
+
+  alert(
+    "Conecte este botão à função de cadastro do admin.js."
+  );
+
+}
+
+
+</script>
+
+
+</body>
+</html>

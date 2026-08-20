@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CappuMind | Meu Perfil</title>
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script src="js/firebase-config.js"></script>
+  <script defer src="js/main.js"></script>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       TOPO
+  ========================== -->
+
+  <header class="topbar">
+
+    <div class="topbar-inner">
+
+      <button
+        id="menuButton"
+        class="menu-button"
+        aria-label="Abrir menu">
+
+        <i></i>
+        <i></i>
+        <i></i>
+
+      </button>
+
+      <a class="logo" href="index.html">
+        Cappu<small>♥</small>
+      </a>
+
+      <div class="actions">
+
+        <button
+          id="notificationButton"
+          class="plain-icon">
+          ♧
+          <b></b>
+        </button>
+
+        <button
+          id="profileButton"
+          class="avatar">
+          CM
+        </button>
+
+        <!-- Compatibilidade com main.js -->
+
+        <button
+          id="btn-admin"
+          class="d-none"
+          onclick="window.location.href='admin.html'">
+          Admin
+        </button>
+
+        <button
+          id="btn-login"
+          class="d-none"
+          onclick="abrirLogin()">
+          Entrar
+        </button>
+
+        <button
+          id="btn-logout"
+          class="d-none"
+          onclick="logout()">
+          Sair
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       CONTEÚDO DO PERFIL
+  ========================== -->
+
+  <main class="content profile-page">
+
+    <!-- Perfil -->
+
+    <section class="profile-header">
+
+      <div class="profile-avatar">
+        CM
+      </div>
+
+      <div class="profile-info">
+
+        <p class="kicker">
+          Meu espaço no Cappu
+        </p>
+
+        <h1 id="perfilNome">
+          Olá, leitor! ☕
+        </h1>
+
+        <p id="perfilEmail">
+          carregando...
+        </p>
+
+        <p class="profile-description">
+          Apaixonado por histórias, café e boas ideias. ♥
+        </p>
+
+        <button
+          class="cappu-btn"
+          id="editarPerfilButton">
+
+          ✎ Editar perfil
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ESTATÍSTICAS
+    ========================== -->
+
+    <section class="profile-stats">
+
+      <div class="stat-card">
+
+        <span class="stat-icon">
+          📚
+        </span>
+
+        <strong id="totalHistorias">
+          0
+        </strong>
+
+        <span>
+          Histórias publicadas
+        </span>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span class="stat-icon">
+          📖
+        </span>
+
+        <strong id="totalLidas">
+          0
+        </strong>
+
+        <span>
+          Histórias lidas
+        </span>
+
+      </div>
+
+
+      <div class="stat-card">
+
+        <span class="stat-icon">
+          ♡
+        </span>
+
+        <strong id="totalFavoritos">
+          0
+        </strong>
+
+        <span>
+          Favoritos
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         MINHAS HISTÓRIAS
+    ========================== -->
+
+    <section>
+
+      <div class="section-head">
+
+        <div>
+          <p class="kicker">
+            Seu conteúdo
+          </p>
+
+          <h2>
+            Minhas histórias
+          </h2>
+        </div>
+
+        <button
+          class="see-all"
+          onclick="window.location.href='publicar.html'">
+
+          + Nova história
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="minhasHistorias"
+        class="stories">
+
+        <!-- Histórias serão carregadas pelo JS -->
+
+      </div>
+
+
+      <div
+        id="semHistorias"
+        class="empty">
+
+        <div>
+          📖
+        </div>
+
+        <h3>
+          Você ainda não publicou histórias
+        </h3>
+
+        <p>
+          Que tal transformar uma ideia em uma nova história?
+        </p>
+
+        <button
+          class="cappu-btn"
+          onclick="window.location.href='publicar.html'">
+
+          Publicar minha primeira história ✎
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONFIGURAÇÕES
+    ========================== -->
+
+    <section class="profile-settings">
+
+      <div class="section-head">
+
+        <div>
+
+          <p class="kicker">
+            Personalização
+          </p>
+
+          <h2>
+            Configurações
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="settings-list">
+
+        <button
+          class="setting-item"
+          id="editarPerfil">
+
+          <span class="setting-icon">
+            ✎
+          </span>
+
+          <span>
+            <strong>Editar perfil</strong>
+            <small>
+              Altere seu nome e informações
+            </small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+
+        <button
+          class="setting-item"
+          id="alterarSenha">
+
+          <span class="setting-icon">
+            🔒
+          </span>
+
+          <span>
+            <strong>Alterar senha</strong>
+            <small>
+              Atualize sua senha de acesso
+            </small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+
+        <button
+          class="setting-item"
+          id="darkModeButton">
+
+          <span class="setting-icon">
+            ☾
+          </span>
+
+          <span>
+            <strong>Modo escuro</strong>
+            <small>
+              Alterar aparência do Cappu
+            </small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+
+        <button
+          class="setting-item logout-item"
+          onclick="logout()">
+
+          <span class="setting-icon">
+            ↪
+          </span>
+
+          <span>
+            <strong>Sair da conta</strong>
+            <small>
+              Encerrar sua sessão
+            </small>
+          </span>
+
+          <b>›</b>
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       MENU LATERAL
+  ========================== -->
+
+  <aside
+    id="sideMenu"
+    class="side-menu">
+
+    <div class="side-head">
+
+      <a
+        class="logo"
+        href="index.html">
+
+        Cappu
+
+      </a>
+
+      <button id="closeMenu">
+        ×
+      </button>
+
+    </div>
+
+
+    <a href="index.html">
+      ⌂
+      <span>Início</span>
+    </a>
+
+
+    <a href="explorar.html">
+      ⌕
+      <span>Explorar</span>
+    </a>
+
+
+    <a href="comunidade.html">
+      ♧
+      <span>Comunidade</span>
+    </a>
+
+
+    <a href="biblioteca.html">
+      ▢
+      <span>Biblioteca</span>
+    </a>
+
+
+    <a href="favoritos.html">
+      ♡
+      <span>Favoritos</span>
+    </a>
+
+
+    <a
+      class="active"
+      href="perfil.html">
+
+      ♙
+      <span>Perfil</span>
+
+    </a>
+
+
+    <button id="darkModeButtonMenu">
+
+      ☾
+      <span>Modo escuro</span>
+
+    </button>
+
+  </aside>
+
+
+  <div
+    id="menuOverlay"
+    class="overlay">
+  </div>
+
+
+  <!-- =========================
+       MENU INFERIOR
+  ========================== -->
+
+  <nav class="bottom-nav">
+
+    <a href="index.html">
+
+      <span>⌂</span>
+      <small>Início</small>
+
+    </a>
+
+
+    <a href="explorar.html">
+
+      <span>⌕</span>
+      <small>Explorar</small>
+
+    </a>
+
+
+    <a href="biblioteca.html">
+
+      <span>▢</span>
+      <small>Biblioteca</small>
+
+    </a>
+
+
+    <a href="favoritos.html">
+
+      <span>♡</span>
+      <small>Favoritos</small>
+
+    </a>
+
+
+    <a
+      class="active"
+      href="perfil.html">
+
+      <span>♙</span>
+      <small>Perfil</small>
+
+    </a>
+
+  </nav>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    id="toast"
+    class="toast">
+  </div>
+
+
+  <!-- =========================
+       RODAPÉ
+  ========================== -->
+
+  <footer class="footer">
+
+    <p>
+      © 2026 CappuMind — Todos os direitos reservados.
+    </p>
+
+    <small>
+      Feito com ♥ para quem ama histórias.
+    </small>
+
+  </footer>
+
+
+  <!-- Bootstrap -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS da interface -->
+
+  <script src="ui.js"></script>
+
+
+  <!-- JS específico do perfil -->
+
+  <script src="js/perfil.js"></script>
+
+</body>
+
+</html>
