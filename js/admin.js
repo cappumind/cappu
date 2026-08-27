@@ -5,7 +5,7 @@ auth.onAuthStateChanged(user => {
   if (!user) return window.location.href = "index.html";
   usuarioAtual = user;
 
-  db.collection("usuarios").doc(user.uid).get().then(doc => {
+  db.collection("Leitores").doc(user.uid).get().then(doc => {
     if (!doc.exists || doc.data().perfil !== "admin") {
       alert("Acesso negado.");
       window.location.href = "index.html";
@@ -42,7 +42,7 @@ function carregarProdutos() {
         </div>
       `;
     });
-    document.getElementById("lista-produtos").innerHTML = html;
+    document.getElementById("produtosAdmin").innerHTML = html;
     mostrarMensagem("Produtos carregados com sucesso.", "info");
   }).catch(error => {
     console.error("Erro ao carregar produtos:", error);
@@ -142,7 +142,7 @@ function mostrarMensagem(texto, tipo) {
 
 // Gerenciar usuários
 function carregarUsuarios() {
-  db.collection("usuarios").get().then(snapshot => {
+  db.collection("Leitores").get().then(snapshot => {
     let html = "";
     snapshot.forEach(doc => {
       const u = doc.data();
@@ -156,14 +156,14 @@ function carregarUsuarios() {
         </li>
       `;
     });
-    document.getElementById("lista-usuarios").innerHTML = html;
+    document.getElementById("usuariosAdmin").innerHTML = html;
   }).catch(err => {
     console.error("Erro ao carregar usuários:", err);
   });
 }
 
 function promover(uid) {
-  db.collection("usuarios").doc(uid).update({ perfil: "admin" }).then(() => {
+  db.collection("Leitores").doc(uid).update({ perfil: "admin" }).then(() => {
     mostrarMensagem("Usuário promovido a admin.", "success");
     carregarUsuarios();
   }).catch(err => {
