@@ -69,7 +69,7 @@ function cadastrar() {
 
   //auth.createUserWithEmailAndPassword(email, senha)
     //.then(cred => {
-      //return db.collection("usuarios").doc(cred.user.uid).set({
+      //return db.collection("Leitores").doc(cred.user.uid).set({
         //email: email,
         //perfil: "cliente"
       //});
@@ -140,7 +140,7 @@ function carregarProdutos() {
 
 function promoverUsuarioParaAdmin() {
     if (!usuarioAtual) return alert("Faça login primeiro.");
-    db.collection("usuarios").doc(usuarioAtual.uid).set({ perfil: "admin" }, { merge: true })
+    db.collection("Leitores").doc(usuarioAtual.uid).set({ perfil: "admin" }, { merge: true })
         .then(() => {
             alert("Usuário promovido a administrador!");
         });
@@ -152,7 +152,7 @@ auth.onAuthStateChanged(user => {
     document.getElementById("btn-logout").classList.toggle("d-none", !user);
 
     if (user) {
-        db.collection("usuarios").doc(user.uid).get().then(doc => {
+        db.collection("Leitores").doc(user.uid).get().then(doc => {
             if (doc.exists && doc.data().perfil === "admin") {
                 document.getElementById("btn-admin").classList.remove("d-none");
             }
