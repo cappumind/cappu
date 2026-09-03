@@ -17,24 +17,71 @@ function login() {
 
 
 function cadastrar() {
-  const email = document.getElementById("emailCadastro").value;
-  const senha = document.getElementById("senhaCadastro").value;
+    const email = document.getElementById("emailCadastro").value.trim();
+    const senha = document.getElementById("senhaCadastro").value;
 
-  auth.createUserWithEmailAndPassword(email, senha)
-    .then(cred => {
-      return db.collection("usuarios").doc(cred.user.uid).set({
-        email: email,
-        perfil: "cliente"
-      });
-    })
-    .then(() => {
-      alert("Cadastro realizado!");
-      bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
-    })
-    .catch(error => {
-      alert("Erro ao cadastrar: " + error.message);
-    });
+    if (!email || !senha) {
+        alert("Preencha o email e a senha.");
+        return;
+    }
+
+    auth.createUserWithEmailAndPassword(email, senha)
+        .then(cred => {
+
+            console.log("Authentication criado!");
+            console.log("UID:", cred.user.uid);
+
+            return db.collection("Leitores")
+                .doc(cred.user.uid)
+                .set({
+                    email: email,
+                    perfil: "cliente"
+                });
+        })
+        .then(() => {
+
+            console.log("Documento criado em Leitores!");
+
+            alert("Cadastro realizado com sucesso!");
+
+            const modal = bootstrap.Modal.getInstance(
+                document.getElementById("loginModal")
+            );
+
+            if (modal) {
+                modal.hide();
+            }
+        })
+        .catch(error => {
+
+            console.error("ERRO:", error);
+            console.error("Código:", error.code);
+            console.error("Mensagem:", error.message);
+
+            alert("Erro ao cadastrar: " + error.message);
+        });
 }
+
+
+//function cadastrar() {
+  //const email = document.getElementById("emailCadastro").value;
+  //const senha = document.getElementById("senhaCadastro").value;
+
+  //auth.createUserWithEmailAndPassword(email, senha)
+    //.then(cred => {
+      //return db.collection("usuarios").doc(cred.user.uid).set({
+        //email: email,
+        //perfil: "cliente"
+      //});
+    //})
+    //.then(() => {
+      //alert("Cadastro realizado!");
+      //bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+    //})
+    //.catch(error => {
+      //alert("Erro ao cadastrar: " + error.message);
+    //});
+//}
 
 
 function logout() {
