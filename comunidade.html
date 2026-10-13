@@ -17,6 +17,16 @@
     <section class="community-compose"><div class="compose-heading"><span class="compose-icon">✎</span><div><h2>Coloque sua ideia no mundo</h2><p>Uma frase pode inspirar uma história inteira.</p></div></div><form id="ideaForm"><label for="ideaType">Tipo de publicação</label><select id="ideaType" required><option value="Ideia de história">Ideia de história</option><option value="Personagem">Personagem</option><option value="Enredo">Enredo</option><option value="Construção de mundo">Construção de mundo</option><option value="Pergunta para a comunidade">Pergunta para a comunidade</option></select><label for="ideaText">Sua ideia</label><textarea id="ideaText" rows="4" maxlength="1200" placeholder="E se uma bibliotecária conseguisse ouvir as memórias dos livros...?" required></textarea><div class="compose-bottom"><small><span id="ideaCount">0</span>/1200 caracteres · Respeite e incentive outros leitores.</small><button class="cappu-btn" type="submit">Compartilhar ideia ✨</button></div><p id="ideaMessage" class="form-message" role="status"></p></form><div id="communityLoginHint" class="notice" hidden>Para publicar uma ideia, entre ou crie sua conta. Você pode ler as publicações da comunidade sem login.</div></section>
     <section class="community-feed-section"><div class="feed-title"><div><span class="page-kicker">NOSSA COMUNIDADE</span><h2>Ideias fresquinhas</h2></div><label class="filter-label" for="ideaFilter">Filtrar <select id="ideaFilter"><option value="Todas">Todas</option><option>Ideia de história</option><option>Personagem</option><option>Enredo</option><option>Construção de mundo</option><option>Pergunta para a comunidade</option></select></label></div><div id="communityFeed" class="community-feed" aria-live="polite"></div><div id="communityEmpty" class="empty-panel" hidden><span>☕</span><h2>O primeiro capítulo começa aqui</h2><p>Ainda não há ideias publicadas. Que tal compartilhar a primeira?</p></div></section>
   </main>
+  <aside id="sideMenu" class="side-menu">
+  <div class="side-head"><a class="logo" href="index.html">Cappu</a><button id="closeMenu">×</button></div>
+  <a class="active" href="index.html">⌂ <span>Início</span></a>
+  <a href="explorar.html">⌕ <span>Explorar</span></a>
+  <a href="comunidade.html">♧ <span>Comunidade</span></a>
+  <a href="biblioteca.html">▢ <span>Biblioteca</span></a>
+  <a href="favoritos.html">♡ <span>Favoritos</span></a>
+  <a href="perfil.html">♙ <span>Perfil</span></a>
+  <button id="darkModeButton">☾ <span>Modo escuro</span></button>
+</aside>
   <nav class="bottom-nav">
   <a class="active" href="index.html"><span>⌂</span><small>Início</small></a>
   <a href="explorar.html"><span>⌕</span><small>Explorar</small></a>
