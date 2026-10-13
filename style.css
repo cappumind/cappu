@@ -1921,3 +1921,7 @@ textarea.cappu-input {
   }
 
 }
+.cappu-modal .auth-switch{display:block;margin:8px 0 12px;padding:0;background:transparent;border:0;color:var(--brown);font-size:12px;font-weight:700;text-decoration:underline}
+.story-synopsis{font-size:13px;line-height:1.55;color:var(--muted);margin:8px 0 12px}
+.story-info .cappu-btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;min-height:38px;padding:0 14px;font-size:12px}
+.page-admin{font-size:12px;font-weight:700;color:var(--brown);text-decoration:none;border:1px solid var(--cream2);border-radius:10px;padding:7px 10px}

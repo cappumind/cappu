@@ -62,7 +62,7 @@
     <button class="see-all">Ver tudo ›</button>
   </div>
 
-  <div class="featured">
+  <div class="featured" id="featuredStories">
     <article class="featured-card">
       <div class="cover romance"></div>
       <div class="featured-info">
@@ -104,8 +104,8 @@
 
 <!-- Filtros antigos preservados para o main.js -->
 <div id="filterPanel" class="filters">
-  <div><label for="precoMin">Valor mínimo</label><input id="precoMin" type="number" placeholder="Mínimo"></div>
-  <div><label for="precoMax">Valor máximo</label><input id="precoMax" type="number" placeholder="Máximo"></div>
+  <div><label for="precoMin">Gênero</label><input id="precoMin" type="text" placeholder="Ex.: Romance"></div>
+  <div><label for="precoMax">Autor</label><input id="precoMax" type="text" placeholder="Nome do autor"></div>
   <button onclick="aplicarFiltros()">Filtrar</button>
 </div>
 
@@ -116,10 +116,7 @@
 </section>
 
 <!-- Mantido para compatibilidade com o main.js -->
-<div class="d-none">
-  <ul id="carrinho"></ul>
-  <button onclick="finalizarCompra()">Finalizar Compra</button>
-</div>
+
 
 </main>
 
@@ -144,13 +141,15 @@
       </div>
       <div class="modal-body">
         <h3>Entrar</h3><p>Continue sua jornada entre histórias.</p>
-        <input class="cappu-input" id="email" placeholder="Seu email" type="email">
-        <input class="cappu-input" id="senha" placeholder="Sua senha" type="password">
+        <input class="cappu-input" id="email" placeholder="Seu e-mail" type="email" required autocomplete="email">
+        <input class="cappu-input" id="senha" placeholder="Sua senha" type="password" required autocomplete="current-password">
         <button class="cappu-btn full" onclick="login()">Entrar</button>
+        <button class="auth-switch" type="button" onclick="recuperarSenha()">Esqueci minha senha</button>
         <hr>
         <h3>Criar conta</h3>
-        <input class="cappu-input" id="emailCadastro" placeholder="Novo email" type="email">
-        <input class="cappu-input" id="senhaCadastro" placeholder="Crie uma senha" type="password">
+        <input class="cappu-input" id="nomeCadastro" placeholder="Como podemos chamar você? (opcional)" type="text" maxlength="60" autocomplete="nickname">
+        <input class="cappu-input" id="emailCadastro" placeholder="Novo e-mail" type="email" required autocomplete="email">
+        <input class="cappu-input" id="senhaCadastro" placeholder="Crie uma senha" type="password" required minlength="6" autocomplete="new-password">
         <button class="cappu-btn outline full" onclick="cadastrar()">Cadastrar</button>
       </div>
     </div>
@@ -173,11 +172,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  if (typeof carregarProdutos === "function") carregarProdutos();
-});
-</script>
 <script src="js/ui.js"></script>
 </body>
 </html>
