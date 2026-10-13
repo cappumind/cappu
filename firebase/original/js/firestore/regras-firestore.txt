@@ -1,0 +1,64 @@
+REGRAS PARA AS NOVAS FUNCIONALIDADES CAPPU MIND
+
+IMPORTANTE: integre estas regras às regras existentes do seu projeto. Não substitua regras de outras coleções usadas pelo index/admin sem revisar, pois isso pode interromper funcionalidades que já funcionam.
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function ownsStory(storyId) {
+      return signedIn() && get(/databases/$(database)/documents/historias/$(storyId)).data.autorUid == request.auth.uid;
+    }
+
+    match /historias/{storyId} {
+      // Visitantes veem somente metadados/sinopse de histórias publicadas; autores veem seus próprios rascunhos.
+      allow read: if resource.data.status == 'publicada'
+                  || (signedIn() && resource.data.autorUid == request.auth.uid);
+      allow create: if signedIn() && request.resource.data.autorUid == request.auth.uid
+                    && request.resource.data.titulo is string
+                    && request.resource.data.sinopse is string
+                    && request.resource.data.genero is string
+                    && request.resource.data.status in ['rascunho', 'publicada'];
+      allow update: if signedIn()
+                    && resource.data.autorUid == request.auth.uid
+                    && request.resource.data.autorUid == resource.data.autorUid
+                    && request.resource.data.status in ['rascunho', 'publicada'];
+      allow delete: if signedIn() && resource.data.autorUid == request.auth.uid;
+
+      // O texto completo fica separado dos metadados para que visitantes não consigam lê-lo.
+      match /conteudo/{contentId} {
+        allow read: if signedIn()
+                    && (get(/databases/$(database)/documents/historias/$(storyId)).data.status == 'publicada' || ownsStory(storyId));
+        allow create, update: if signedIn() && ownsStory(storyId)
+                              && contentId == 'full'
+                              && request.resource.data.texto is string;
+        allow delete: if signedIn() && ownsStory(storyId);
+      }
+    }
+
+    // Subcoleção de favoritos: não adiciona permissões genéricas ao documento Leitores/{uid}.
+    match /Leitores/{leitorId}/favoritos/{storyId} {
+      allow read, delete: if signedIn() && request.auth.uid == leitorId;
+      allow create, update: if signedIn() && request.auth.uid == leitorId
+                            && request.resource.data.storyId == storyId;
+    }
+
+    match /comunidade/{postId} {
+      allow read: if true;
+      allow create: if signedIn()
+                    && request.resource.data.autorUid == request.auth.uid
+                    && request.resource.data.texto is string
+                    && request.resource.data.texto.size() > 0
+                    && request.resource.data.texto.size() <= 1200
+                    && request.resource.data.tipo is string;
+      allow update: if signedIn()
+                    && resource.data.autorUid == request.auth.uid
+                    && request.resource.data.autorUid == resource.data.autorUid;
+      allow delete: if signedIn() && resource.data.autorUid == request.auth.uid;
+    }
+
+    // Mantenha aqui as regras das demais coleções existentes no projeto (ex.: produtos, compras e permissões admin).
+  }
+}

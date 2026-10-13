@@ -262,7 +262,7 @@
     </div>
 
 
-    <div class="stories">
+    <div class="stories" id="popularStories">
 
       <article class="story-card">
 
@@ -445,13 +445,13 @@
     <div>
 
       <label for="precoMin">
-        Valor mínimo
+        Gênero
       </label>
 
       <input
         id="precoMin"
-        type="number"
-        placeholder="Mínimo"
+        type="text"
+        placeholder="Ex.: Romance"
       >
 
     </div>
@@ -460,13 +460,13 @@
     <div>
 
       <label for="precoMax">
-        Valor máximo
+        Autor
       </label>
 
       <input
         id="precoMax"
-        type="number"
-        placeholder="Máximo"
+        type="text"
+        placeholder="Nome do autor"
       >
 
     </div>
@@ -507,18 +507,6 @@
 
   </section>
 
-
-  <!-- Compatibilidade com main.js -->
-
-  <div class="d-none">
-
-    <ul id="carrinho"></ul>
-
-    <button onclick="finalizarCompra()">
-      Finalizar Compra
-    </button>
-
-  </div>
 
 </main>
 
@@ -794,15 +782,6 @@
 
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  if (typeof carregarProdutos === "function") {
-    carregarProdutos();
-  }
-
-});
-
 
 /*
  * Filtro visual por gênero.

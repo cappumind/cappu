@@ -40,12 +40,17 @@ document.getElementById("notificationButton")?.addEventListener("click",()=>{
 });
 
 document.getElementById("profileButton")?.addEventListener("click",()=>{
- show("Abrindo seu perfil...");
+ window.location.href = "perfil.html";
 });
 
 document.getElementById("publishButton")?.addEventListener("click",()=>{
- show("Abrindo página para publicar sua história...");
- // Quando criar a página: window.location.href="publicar.html";
+ if (typeof auth !== "undefined" && auth.currentUser) {
+   window.location.href = "publicar.html";
+ } else if (typeof abrirLogin === "function") {
+   abrirLogin();
+ } else {
+   window.location.href = "publicar.html";
+ }
 });
 
 document.getElementById("darkModeButton")?.addEventListener("click",()=>{
