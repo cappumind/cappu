@@ -238,7 +238,7 @@ auth.onAuthStateChanged(async user => {
   logoutButton?.classList.toggle('d-none', !user);
   if (adminButton) adminButton.classList.add('d-none');
   const avatar = document.getElementById('profileButton');
-  if (avatar) avatar.textContent = user ? (user.displayName || user.email || 'CM').trim().charAt(0).toUpperCase() : 'CM';
+  if (avatar) avatar.innerHTML = '<img src="assets/cappumind-cat-avatar.png" alt="Perfil" class="avatar-image">';
 
   if (user) {
     try {

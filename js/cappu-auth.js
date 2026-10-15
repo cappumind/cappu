@@ -137,7 +137,7 @@
     logoutButtons.forEach(button => { button.hidden = !user; });
     adminLinks.forEach(link => { link.hidden = true; });
     document.querySelectorAll('.page-profile').forEach(link => {
-      link.textContent = user ? ((user.displayName || user.email || 'CM').trim().charAt(0).toUpperCase()) : 'CM';
+      link.innerHTML = '<img src="assets/cappumind-cat-avatar.png" alt="Perfil" class="avatar-image">';
       link.title = user ? (user.displayName || user.email || 'Meu perfil') : 'Meu perfil';
     });
     if (user) {
